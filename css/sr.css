@@ -1,0 +1,89 @@
+.box{
+width:1200px;
+margin: 0 auto;	
+}
+.article-main{
+	width:800px;
+	float:left;
+	padding:20px;
+}
+.headerl{
+	text-align:center;
+	margin-top:30px;
+	margin-bottom:30px;
+}
+.header1 h1{
+	font-size:30px;
+}
+.time{
+	margin-top:20px;
+	color: #999;
+}
+
+.article-main p{
+	line-height: 30px;
+	text-indent: 2em;
+	margin-bottom:10px;
+}
+.article-main figure{
+	width: 400px;
+	margin: 20px auto;
+	text-align: center;
+}
+.article-main img{
+	width:400px;
+}
+.article-main figcaption{
+	margin-top: 10px;
+}
+.p1{
+	margin-top:20px;
+}
+.p1 h3{
+	font-size:14px;
+	margin-bottom: 10px;
+}
+.p1 p{
+	padding: 10px;
+	text-indent: 0;
+	border: 1px dashed #ccc;
+}
+.fbp1{
+	margin-top:30px;
+}
+.message{
+	width:100%;
+	height:100px;
+	border: 1px solid #ccc;
+	margin-top: 20px;
+}
+.tijiao{
+	display: block;
+	width:200px;
+	height:35px;
+	line-height:35px;
+	margin: 0 auto;
+	background-color:darkorchid;
+	color:white;
+	font-size:18px;
+	text-align:center;
+	border:0;
+}
+
+.celan{
+	width: 300px;
+	padding: 20px;
+	float: right;
+	background-color: #eee;
+}
+.celan img{
+	width:300px;
+	margin-top: 10px;
+}
+
+.list2 li{
+	width: 300px;
+	line-height: 40px;
+	list-style-type: circle;
+	list-style-position: inside;
+}
