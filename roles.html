@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChungSubin - 角色页</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      background-color: #8747bb;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-tab {
+      color: white;
+      text-decoration: none;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .nav-tab:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-tab.active {
+      background-color: white;
+      color: purple;
+      font-weight: bold;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      font-family: 'Lobster', cursive;
+    }
+
+    .countdown {
+      font-size: 1rem;
+      font-family: 'Pacifico', cursive;
+    }
+
+    footer {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 4rem;
+    }
+
+    .container {
+      display: flex;
+      height: calc(150vh - 140px);
+    }
+
+    .sidebar {
+      width: 200px;
+      background: #f2f2f2;
+      padding: 1.7rem 1rem;
+    }
+
+    .sidebar button {
+      display: block;
+      width: 85%;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border: none;
+      background: #6d4dc5;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .sidebar button:hover {
+      background: #41306d
+    }
+
+    .content {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    .content h1 {
+      color: #9e47c9;
+      margin-bottom: 1rem;
+    }
+
+    .video-section {
+      display: none;
+    }
+
+    .video-section.active {
+      display: block;
+    }
+
+    video {
+      max-width: 87%;
+      border: 2px solid #8747bb;
+      border-radius: 8px;
+    }
+
+
+    .content h3 {
+      color: #c970c9;
+      margin-bottom: 1rem;
+    }
+  </style>
+  <script>
+    function padZero(num) {
+      return num < 10 ? '0' + num : num;
+    }
+
+    function updateCountdown() {
+      const countdownEl = document.getElementById('countdown');
+      const birthday = new Date('2025-08-17T00:00:00+09:00'); 
+      const now = new Date();
+      const diff = birthday - now;
+
+      if (diff <= 0) {
+        countdownEl.innerText = 'Happy Birthday!';
+      } else {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        countdownEl.innerText = `countdown：${days}days\u00A0 ${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    window.onload = function () {
+      updateCountdown();
+      const buttons = document.querySelectorAll('.sidebar button');
+      const sections = document.querySelectorAll('.video-section');
+      buttons.forEach((btn, i) => {
+        btn.onclick = () => {
+          sections.forEach(sec => sec.classList.remove('active'));
+          sections[i].classList.add('active');
+        };
+      });
+    };
+  </script>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo">ChungSubin</div>
+    <nav class="nav-tabs">
+      <a href="index.html" class="nav-tab " id="tab-home">Home&#128156;</a>
+      <a href="roles.html" class="nav-tab active" id="tab-role">Roles&#127803;</a>
+      <a href="book.html" class="nav-tab" id="tab-book">Answers&#127808;</a>
+      <a href="wish.html" class="nav-tab" id="tab-bless">Blessings&#128008;&#65039;</a>
+    </nav>
+    <div class="countdown" id="countdown"></div>
+  </header>
+
+  <main class="container">
+    <aside class="sidebar">
+      <button>우슬기 禹瑟琪</button>
+      <button>봉난실 奉兰实</button>
+      <button>나리 娜莉</button>
+      <button>연희 妍熙</button>
+      <button>이수련 李秀莲</button>
+      <button>김수빈 金秀彬</button>
+      <button>태소연 太素妍</button>
+      <button>백미주 白镁珠</button>
+      <button>백선유 白善宥</button>
+      <button>여학생2 女学生2</button>
+      <button>이선주 李善珠</button>
+      <button>지인 智仁</button>
+      <button>주희 珠熙</button>
+      <button>태희 泰熙</button>
+    </aside>
+    <section class="content">
+      <h1>배우가 되어 주셔서 감사합니다&#127803;谢谢你成为演员</h1>
+
+
+      <div class="video-section  active">
+        <h2>우슬기 禹瑟琪</h2>
+        <h3>20250210</h3>
+        <video src="video/sq.mp4" controls></video>
+      </div>
+      <div class="video-section">
+        <h2>봉난실 奉兰实</h2>
+        <h3>20240419</h3>
+        <video src="video/ls.mp4" controls></video>
+      </div>
+      <div class="video-section">
+        <h2>나리 娜莉</h2>
+        <h3>20231004</h3>
+        <video src="video/nl.mp4" controls></video>
+      </div>
+      <div class="video-section">
+        <h2>연희 妍熙</h2>
+        <h3>20230927</h3>
+        <video src="video/yx.mp4" controls></video>
+      </div>
+      <div class="video-section">
+        <h2>이수련 李秀莲</h2>
+        <h3>20221230</h3>
+        <video src="video/xl.mp4" controls></video>
+      </div>
+      <div class="video-section">
+        <h2>김수빈 金秀彬</h2>
+        <h3>20221219</h3>
+        <video src="video/jxb.mp4" controls></video>
+      </div>
+      <div class="video-section">
+        <h2>태소연 太素妍</h2>
+        <h3>20221109</h3>
+        <video src="video/ds.mp4" controls></video>
+      </div>
+      <div class="video-section">
+        <h2>백미주 白镁珠</h2>
+        <h3>20220225</h3>
+        <video src="video/sn.mp4" controls></video>
+      </div>
+      <div class="video-section">
+        <h2>백선유 白善宥</h2>
+        <h3>20220126</h3>
+        <video src="video/jc.mp4" controls></video>
+      </div>
+      <div class="video-section">
+        <h2>여학생2 女学生2</h2>
+        <h3>20210430</h3>
+        <video src="video/ns.mp4" controls></video>
+      </div>
+      <div class="video-section">
+        <h2>이선주 李善珠</h2>
+        <h3>20201117</h3>
+        <video src="video/sc.mp4" controls></video>
+      </div>
+      <div class="video-section">
+        <h2>지인 智仁</h2>
+        <h3>2020</h3>
+        <video src="video/zr.mp4" controls></video>
+      </div>
+      <div class="video-section">
+        <h2>주희 珠熙</h2>
+        <h3>2019</h3>
+        <video src="video/zx.mp4" controls></video>
+      </div>
+      <div class="video-section">
+        <h2>태희 泰熙</h2>
+        <h3>2019</h3>
+        <video src="video/tx.mp4" controls></video>
+      </div>
+            <h3>당신의 모든 모습은 존재의 의미가 있습니다&#127803;每一个你都有存在的意义</h3>
+    </section>
+  </main>
+
+  <footer>
+    Copytight @ CHUNGFOR ALL Rights Reserved. CHUNGFOR 版权所有
+  </footer>
+</body>
+
+</html>
