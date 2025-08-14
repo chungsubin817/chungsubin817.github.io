@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChungSubin - 首页</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #333;
+    }
+
+    .navbar {
+      background-color: #8747bb;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-tab {
+      color: white;
+      text-decoration: none;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .nav-tab:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-tab.active {
+      background-color: white;
+      color: purple;
+      font-weight: bold;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      font-family: 'Lobster', cursive;
+    }
+
+    .countdown {
+      font-size: 1rem;
+      font-family: 'Pacifico', cursive;
+    }
+
+    footer {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+
+
+    .intro {
+      padding: 2rem;
+      text-align: center;
+      background: #f4f4f4;
+    }
+
+    .intro h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #9e47c9;
+    }
+
+    .intro-content {
+      max-width: 800px;
+      margin: auto;
+      text-align: left;
+    }
+
+    .intro-video {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .gallery {
+      padding: 2rem;
+    }
+
+    .waterfall-section {
+      margin-bottom: 2rem;
+    }
+
+    .waterfall-section h2 {
+      text-align: center;
+      color: #c970c9;
+      margin-bottom: 1rem;
+    }
+
+    .masonry {
+      column-count: 4;
+      column-gap: 1em;
+    }
+
+    .masonry img {
+      width: 100%;
+      display: block;
+      margin-bottom: 1em;
+      border-radius: 6px;
+      transition: transform 0.3s;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      background-color: white;
+      box-shadow: 3px 3px 3px #999;
+      font-size: 14px;
+      line-height: 24px;
+      background-image: linear-gradient(180deg, pink, white);
+      break-inside: avoid;
+    }
+
+    .masonry img:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 1024px) {
+      .masonry {
+        column-count: 3;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .masonry {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .masonry {
+        column-count: 1;
+      }
+    }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .carousel .slides img {
+      width: 100%;
+
+      object-fit: cover;
+      display: none;
+    }
+
+    .carousel .slides img.active {
+      display: block;
+      animation: fade 1s ease-in-out;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0.4;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .carousel .dots {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+    }
+
+    .carousel .dots span {
+      display: block;
+      width: 10px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .carousel .dots span.active {
+      background: #8747bb;
+    }
+
+    .intro-flex {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .intro-flex img {
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .intro-flex {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    .birthday-animation {
+      background-color: black;
+      height: 400px;
+      position: relative;
+    }
+
+    #birthdayCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="logo">ChungSubin</div>
+    <nav class="nav-tabs">
+      <a href="index.html" class="nav-tab active" id="tab-home">Home&#128156;</a>
+      <a href="roles.html" class="nav-tab" id="tab-role">Roles&#127803;</a>
+      <a href="book.html" class="nav-tab" id="tab-book">Answers&#127808;</a>
+      <a href="wish.html" class="nav-tab" id="tab-bless">Blessings&#128008;&#65039;</a>
+    </nav>
+    <div class="countdown" id="countdown"></div>
+  </header>
+
+  <main>
+  
+    <section class="carousel">
+      <div class="slides">
+        <img src="img/jm/a.jpg" class="active" style="height: 735px;" />
+        <img src="img/jm/8.jpg" style="height: 540px;" />
+        <img src="img/jm/30.jpg" style="height: 570px;" />
+        <img src="img/jm/b.jpg" style="height: 650px;" />
+        <img src="img/jm/12.jpg" style="height: 720px;" />
+
+
+
+      </div>
+      <div class="dots"></div>
+    </section>
+
+    <section class="intro">
+
+
+      <section class="intro">
+        <h1>당신의 출생에 감사합니다&#128156;谢谢你的出生</h1>
+        <div class="intro-flex">
+          <img src="img/rw.jpg" alt="Subin" style="width: 300px; margin-bottom: 10px;" />
+          <div class="intro-content">
+            <h2>Name：정수빈/ChungSubin/郑受彬</h2>
+            <h3 style="margin-top: 3px;">Birthday：1998.08.17</h3>
+            <h3 style="margin-top: 3px;">Height：164cm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mbti：INFP
+            </h3>
+            <h3 style="margin-top: 4px;"><a
+                href="https://www.instagram.com/chung.su.bin">instagram</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+                href="https://x.com/chungsubin47">X</a></h3>
+            <p style="margin-top: 10px;">
+              毕业于韩国艺术综合大学戏剧表演系，韩国女演员。
+              2020年，郑受彬出演校园爱情剧《Live On》，从而正式出道。
+              2021年4月，出演悬疑剧《黑洞》；10月，出演的电影《绝海孤岛》在韩国上映。
+              2022年1月，出演的青春校园剧《你和我的警察课堂》播出 ；2月，出演青少年犯罪剧《少年法庭》；
+              11月，出演的校园惊悚剧《第三人称复仇》首播；12月19日，出演的电视剧《Trolley：命运交叉点》播出，
+              该剧是郑受彬首次担任主演的作品 ，她凭借该剧获得“2023年SBS演技大奖-新人演技奖” ；12月30日，出演的悬疑奇幻剧《ISLAND》播出。
+              2024年，出演犯罪剧《搜查班长1958》。2025年2月，主演的校园惊悚剧《善意的竞争》首播，凭借“禹瑟琪”一角，打开知名度。
+            </p>
+            <video src="video/intro.mp4" controls class="intro-video"></video>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="gallery">
+        <h1>Subin's World</h1>
+        <audio controls style="width: 15rem;margin-bottom: 1rem;">
+          <source src="music/gq.mp3" type="audio/mpeg">
+        </audio>
+        <div class="waterfall-section">
+          <h2>글자&#128156;字</h2>
+          <div class="masonry" id="subin-gallery">
+            <img src="img/zi/1.jpg" />
+            <img src="img/zi/2.jpg" />
+            <img src="img/zi/3.jpg" />
+
+            <img src="img/zi/5.jpg" />
+            <img src="img/zi/6.jpg" />
+            <img src="img/zi/7.jpg" />
+            <img src="img/zi/8.jpg" />
+            <img src="img/zi/4.jpg" />
+          </div>
+        </div>
+        <div class="waterfall-section">
+          <h2>산과 바다&#128156;山海</h2>
+          <div class="masonry" id="subin-gallery">
+            <img src="img/sh/1.jpg" />
+            <img src="img/sh/6.jpg" />
+            <img src="img/sh/2.jpg" />
+            <img src="img/sh/7.jpg" />
+            <img src="img/sh/4.jpg" />
+            <img src="img/sh/5.jpg" />
+            <img src="img/sh/3.jpg" />
+          </div>
+        </div>
+        <div class="waterfall-section">
+          <h2>선물 같은 하늘&#128156;礼物般的天空</h2>
+          <div class="masonry" id="subin-gallery">
+            <img src="img/tk/2.jpg" />
+            <img src="img/tk/3.jpg" />
+            <img src="img/tk/4.jpg" />
+            <img src="img/tk/5.jpg" />
+            <img src="img/tk/6.jpg" />
+            <img src="img/tk/7.jpg" />
+            <img src="img/tk/8.jpg" />
+            <img src="img/tk/9.jpg" />
+            <img src="img/tk/10.jpg" />
+            <img src="img/tk/11.jpg" />
+            <img src="img/tk/12.jpg" />
+            <img src="img/tk/13.jpg" />
+            <img src="img/tk/14.jpg" />
+            <img src="img/tk/15.jpg" />
+            <img src="img/tk/16.jpg" />
+            <img src="img/tk/17.jpg" />
+            <img src="img/tk/18.jpg" />
+            <img src="img/tk/19.jpg" />
+            <img src="img/tk/20.jpg" />
+            <img src="img/tk/1.jpg" />
+          </div>
+        </div>
+        <div class="waterfall-section">
+          <h2>달님께 소원을 빌다&#128156;向月亮许愿</h2>
+          <div class="masonry" id="subin-gallery">
+            <img src="img/yue/1.jpg" />
+            <img src="img/yue/2.jpg" />
+            <img src="img/yue/8.jpg" />
+            <img src="img/yue/3.jpg" />
+            <img src="img/yue/9.jpg" />
+            <img src="img/yue/5.jpg" />
+            <img src="img/yue/6.jpg" />
+            <img src="img/yue/4.jpg" />
+            <img src="img/yue/7.jpg" />
+
+          </div>
+        </div>
+        <div class="waterfall-section">
+          <h2>밥 잘 먹어&#128156;好好吃饭</h2>
+          <div class="masonry" id="subin-gallery">
+            <img src="img/sw/1.jpg" />
+            <img src="img/sw/2.jpg" />
+            <img src="img/sw/3.jpg" />
+            <img src="img/sw/4.jpg" />
+            <img src="img/sw/5.jpg" />
+            <img src="img/sw/6.jpg" />
+            <img src="img/sw/7.jpg" />
+            <img src="img/sw/8.jpg" />
+            <img src="img/sw/9.jpg" />
+            <img src="img/sw/10.jpg" />
+            <img src="img/sw/11.jpg" />
+            <img src="img/sw/12.jpg" />
+            <img src="img/sw/13.jpg" />
+            <img src="img/sw/14.jpg" />
+            <img src="img/sw/15.jpg" />
+            <img src="img/sw/16.jpg" />
+            <img src="img/sw/17.jpg" />
+            <img src="img/sw/18.jpg" />
+            <img src="img/sw/19.jpg" />
+            <img src="img/sw/20.jpg" />
+            <img src="img/sw/21.jpg" />
+            <img src="img/sw/22.jpg" />
+            <img src="img/sw/23.jpg" />
+            <img src="img/sw/24.jpg" />
+            <img src="img/sw/25.jpg" />
+            <img src="img/sw/26.jpg" />
+            <img src="img/sw/27.jpg" />
+
+          </div>
+        </div>
+        <div class="waterfall-section">
+          <h2>나루&#128156;Naru</h2>
+          <div class="masonry" id="subin-gallery">
+            <img src="img/naru/11.jpg" />
+            <img src="img/naru/2.jpg" />
+            <img src="img/naru/8.jpg" />
+
+            <img src="img/naru/7.jpg" />
+            <img src="img/naru/16.jpg" />
+            <img src="img/naru/5.jpg" />
+            <img src="img/naru/6.jpg" />
+            <img src="img/naru/12.jpg" />
+            <img src="img/naru/4.jpg" />
+
+            <img src="img/naru/9.jpg" />
+            <img src="img/naru/10.jpg" />
+            <img src="img/naru/15.jpg" />
+            <img src="img/naru/14.jpg" />
+            <img src="img/naru/3.jpg" />
+            <img src="img/naru/13.jpg" />
+            <img src="img/naru/1.jpg" />
+
+          </div>
+        </div>
+        <div class="waterfall-section">
+          <h2>신기한 동물&#128156;神奇的动物</h2>
+          <div class="masonry" id="subin-gallery">
+            <img src="img/dw/1.jpg" />
+            <img src="img/dw/5.jpg" />
+            <img src="img/dw/2.jpg" />
+            <img src="img/dw/4.jpg" />
+            <img src="img/dw/3.jpg" />
+            <img src="img/dw/6.jpg" />
+            <img src="img/dw/7.jpg" />
+
+
+          </div>
+        </div>
+        <div class="waterfall-section">
+          <h2>일상&#128156;日常</h2>
+          <div class="masonry" id="my-gallery">
+            <img src="img/qt/1.jpg" />
+            <img src="img/qt/2.jpg" />
+            <img src="img/qt/3.jpg" />
+            <img src="img/qt/4.jpg" />
+            <img src="img/qt/5.jpg" />
+            <img src="img/qt/6.jpg" />
+            <img src="img/qt/7.jpg" />
+            <img src="img/qt/8.jpg" />
+            <img src="img/qt/9.jpg" />
+            <img src="img/qt/10.jpg" />
+            <img src="img/qt/11.jpg" />
+            <img src="img/qt/12.jpg" />
+            <img src="img/qt/13.jpg" />
+            <img src="img/qt/14.jpg" />
+            <img src="img/qt/15.jpg" />
+            <img src="img/qt/16.jpg" />
+            <img src="img/qt/17.jpg" />
+            <img src="img/qt/18.jpg" />
+            <img src="img/qt/19.jpg" />
+            <img src="img/qt/20.jpg" />
+            <img src="img/qt/25.jpg" />
+            <img src="img/qt/21.jpg" />
+            <img src="img/qt/22.jpg" />
+            <img src="img/qt/23.jpg" />
+            <img src="img/qt/24.jpg" />
+            <img src="img/qt/26.jpg" />
+          </div>
+        </div>
+
+        <h1 style="margin-top: 5rem;">My World</h1>
+         <audio controls style="width: 15rem;margin-bottom: 1rem;">
+          <source src="music/g.mp3" type="audio/mpeg">
+        </audio>
+        <div class="waterfall-section">
+          <div class="masonry" id="subin-gallery">
+            <img src="img/jm/1.jpg" />
+            <img src="img/jm/2.jpg" />
+            <img src="img/jm/3.jpg" />
+            <img src="img/jm/4.jpg" />
+            <img src="img/jm/5.jpg" />
+            <img src="img/jm/6.jpg" />
+            <img src="img/jm/24.jpg" />
+            <img src="img/jm/11.jpg" />
+            <img src="img/ta/20.jpg" />
+            <img src="img/ta/21.jpg" />
+            <img src="img/jm/45.jpg" />
+                   <img src="img/jm/27.jpg" />
+                   <img src="img/jm/36.jpg" />
+            <img src="img/ta/22.jpg" />
+            <img src="img/ta/23.jpg" />
+            <img src="img/ta/24.jpg" />
+            <img src="img/ta/25.jpg" />
+            <img src="img/ta/26.jpg" />
+            <img src="img/jm/12.jpg" />
+               <img src="img/jm/37.jpg" />
+            <img src="img/jm/18.jpg" />
+            <img src="img/jm/19.jpg" />
+            <img src="img/jm/20.jpg" />
+            <img src="img/jm/21.jpg" />
+            <img src="img/jm/28.jpg" />
+               <img src="img/jm/38.jpg" />
+            <img src="img/jm/29.jpg" />
+            <img src="img/jm/31.jpg" />
+            <img src="img/jm/32.jpg" />
+            <img src="img/jm/33.jpg" />
+            <img src="img/ta/14.jpg" />
+            <img src="img/ta/15.jpg" />
+            <img src="img/ta/16.jpg" />
+            <img src="img/jm/35.jpg" />
+            <img src="img/jm/39.jpg" />
+            <img src="img/jm/40.jpg" />
+            <img src="img/jm/41.jpg" />
+            <img src="img/jm/34.jpg" />
+            <img src="img/ta/6.jpg" />
+            <img src="img/ta/7.jpg" />
+            <img src="img/jm/42.jpg" />
+            <img src="img/jm/43.jpg" />
+            <img src="img/jm/44.jpg" />
+            <img src="img/jm/46.jpg" />
+            <img src="img/jm/25.jpg" />
+            <img src="img/jm/26.jpg" />
+            <img src="img/jm/7.jpg" />
+            <img src="img/jm/9.jpg" />
+            <img src="img/jm/10.jpg" />
+            <img src="img/jm/65.jpg" />
+            <img src="img/jm/49.jpg" />
+            <img src="img/jm/50.jpg" />
+            <img src="img/ta/27.jpg" />
+            <img src="img/ta/28.jpg" />
+            <img src="img/ta/29.jpg" />
+            <img src="img/ta/30.jpg" />
+            <img src="img/jm/53.jpg" />
+            <img src="img/jm/54.jpg" />
+            <img src="img/jm/55.jpg" />
+            <img src="img/jm/56.jpg" />
+            <img src="img/jm/57.jpg" />
+            <img src="img/jm/62.jpg" />
+            <img src="img/jm/63.jpg" />
+            <img src="img/ta/33.jpg" />
+            <img src="img/ta/34.jpg" />
+            <img src="img/ta/35.jpg" />
+            <img src="img/ta/36.jpg" />
+            <img src="img/ta/37.jpg" />
+            <img src="img/ta/40.jpg" />
+            <img src="img/jm/66.jpg" />
+            <img src="img/jm/67.jpg" />
+            <img src="img/jm/59.jpg" />
+            <img src="img/jm/69.jpg" />
+            <img src="img/jm/70.jpg" />
+            <img src="img/jm/71.jpg" />
+            <img src="img/jm/64.jpg" />
+            <img src="img/jm/60.jpg" />
+            <img src="img/ta/32.jpg" />
+            <img src="img/ta/2.jpg" />
+            <img src="img/ta/3.jpg" />
+            <img src="img/ta/4.jpg" />
+            <img src="img/ta/5.jpg" />
+            <img src="img/jm/14.jpg" />
+            <img src="img/jm/15.jpg" />
+            <img src="img/ta/8.jpg" />
+            <img src="img/ta/9.jpg" />
+            <img src="img/jm/52.jpg" />
+            <img src="img/jm/58.jpg" />
+            <img src="img/jm/68.jpg" />
+            <img src="img/jm/22.jpg" />
+            <img src="img/ta/39.jpg" />
+            <img src="img/jm/61.jpg" />
+            <img src="img/ta/10.jpg" />
+            <img src="img/ta/11.jpg" />
+            <img src="img/ta/12.jpg" />
+            <img src="img/ta/13.jpg" />
+            <img src="img/ta/1.jpg" />
+            <img src="img/ta/17.jpg" />
+            <img src="img/ta/18.jpg" />
+            <img src="img/ta/19.jpg" />
+            <img src="img/ta/38.jpg" />
+            <img src="img/jm/47.jpg" />
+            <img src="img/jm/48.jpg" />
+            <img src="img/ta/31.jpg" />
+            <img src="img/jm/16.jpg" />
+            <img src="img/jm/17.jpg" />
+          </div>
+        </div>
+
+
+
+      </section>
+
+      <section class="birthday-animation">
+        <canvas id="birthdayCanvas"></canvas>
+      </section>
+  </main>
+
+
+
+
+  <footer>
+    Copytight @ CHUNGFOR ALL Rights Reserved. CHUNGFOR 版权所有
+  </footer>
+
+  <script>
+    function padZero(num) {
+      return num < 10 ? '0' + num : num;
+    }
+
+    function updateCountdown() {
+      const countdownEl = document.getElementById('countdown');
+      const birthday = new Date('2025-08-17T00:00:00+09:00'); 
+      const now = new Date();
+      const diff = birthday - now;
+
+      if (diff <= 0) {
+        countdownEl.innerText = 'Happy Birthday!';
+      } else {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        countdownEl.innerText = `countdown：${days}days\u00A0 ${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
+      }
+
+
+
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    const slides = document.querySelectorAll('.carousel .slides img');
+    const dotsContainer = document.querySelector('.carousel .dots');
+    let currentIndex = 0;
+    let slideInterval;
+
+    slides.forEach((_, index) => {
+      const dot = document.createElement('span');
+      if (index === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => {
+        showSlide(index);
+      });
+      dotsContainer.appendChild(dot);
+    });
+    const dots = dotsContainer.querySelectorAll('span');
+
+    function showSlide(index) {
+      slides[currentIndex].classList.remove('active');
+      dots[currentIndex].classList.remove('active');
+      currentIndex = index;
+      slides[currentIndex].classList.add('active');
+      dots[currentIndex].classList.add('active');
+    }
+
+    function nextSlide() {
+      let nextIndex = (currentIndex + 1) % slides.length;
+      showSlide(nextIndex);
+    }
+
+    function startCarousel() {
+      slideInterval = setInterval(nextSlide, 3000); 
+    }
+
+    function stopCarousel() {
+      clearInterval(slideInterval);
+    }
+
+    document.querySelector('.carousel').addEventListener('mouseenter', stopCarousel);
+    document.querySelector('.carousel').addEventListener('mouseleave', startCarousel);
+
+    startCarousel();
+
+
+    const canvas = document.getElementById("birthdayCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const letters = "HAPPY BIRTHDAY".split("");
+    const fontSize = 14;
+    const fixedText = "CHUNGSUBIN          HAPPY BIRTHDAY";
+    const fixedFontSize = 32;
+
+    let columns = 0;
+    let drops = [];
+    let time = 0;
+
+    function resizeCanvas() {
+      const cssWidth = canvas.clientWidth || window.innerWidth;
+      const cssHeight = canvas.parentElement.offsetHeight || 400;
+      const dpr = window.devicePixelRatio || 1;
+
+      canvas.width = Math.floor(cssWidth * dpr);
+      canvas.height = Math.floor(cssHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      columns = Math.floor(cssWidth / fontSize);
+      drops = Array(columns).fill(1);
+    }
+
+    function drawHeart(ctx, x, y, size, alpha = 1) {
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+      gradient.addColorStop(0, `rgba(255, 0, 255, ${alpha})`);
+      gradient.addColorStop(1, `rgba(128, 0, 128, ${alpha})`);
+
+      ctx.save();
+      ctx.fillStyle = gradient;
+      ctx.shadowColor = `rgba(255,0,255,0.8)`;
+      ctx.shadowBlur = 30;
+      ctx.beginPath();
+      const topCurveHeight = size * 0.3;
+      ctx.moveTo(x, y + topCurveHeight);
+      ctx.bezierCurveTo(x, y, x - size / 2, y, x - size / 2, y + topCurveHeight);
+      ctx.bezierCurveTo(x - size / 2, y + (size + topCurveHeight) / 2, x, y + (size + topCurveHeight) / 1.5, x, y + size);
+      ctx.bezierCurveTo(x, y + (size + topCurveHeight) / 1.5, x + size / 2, y + (size + topCurveHeight) / 2, x + size / 2, y + topCurveHeight);
+      ctx.bezierCurveTo(x + size / 2, y, x, y, x, y + topCurveHeight);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function draw() {
+      const w = canvas.clientWidth;
+      const h = canvas.parentElement.offsetHeight;
+
+      ctx.fillStyle = "rgba(0,0,0,0.05)";
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.fillStyle = "white";
+      ctx.font = fontSize + "px monospace";
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+        ctx.fillText(text, x, y);
+        if (y > h || Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+
+      ctx.font = `${fixedFontSize}px sans-serif`;
+      ctx.fillStyle = "rgba(255,255,255,0.9)";
+      const textWidth = ctx.measureText(fixedText).width;
+      ctx.fillText(fixedText, (w - textWidth) / 2, h / 2);
+
+      const heartX = w / 2.1;
+      const heartY = h / 2.5;
+      const baseSize = 60; 
+      const scale = 1 + 0.05 * Math.sin(time * 3); 
+      const alpha = 0.7 + 0.3 * Math.sin(time * 5);
+      drawHeart(ctx, heartX, heartY, baseSize * scale, alpha);
+
+      time += 0.1;
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+    setInterval(draw, 40);
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>
